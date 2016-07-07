@@ -2,6 +2,9 @@
 define('ROOT', dirname(__FILE__));
 define('DS', DIRECTORY_SEPARATOR);
 
+/**
+ * Autoload class to load the controllers / models
+ */
 spl_autoload_register(function($class) {
     // Check if the controller exist in the controllers folder
     if(file_exists(ROOT . DS . 'application' . DS . 'controllers' . DS . $class . '.php'))
@@ -15,6 +18,9 @@ spl_autoload_register(function($class) {
     }
 });
 
+/**
+ * Get the router path for the MVC structure
+ */
 $request_uri = explode('/', $_SERVER["REQUEST_URI"]);
 $script_name = explode('/', $_SERVER["SCRIPT_NAME"]);
 
@@ -27,8 +33,9 @@ for ($i = 0; $i < count($script_name); $i++)
 }
 
 $command = array_values($request_uri);
-$ctr = new SiteController();
 
+
+$ctr = new SiteController();
 
 switch($command[0])
 {
@@ -46,6 +53,8 @@ switch($command[0])
         break;
 
     default:
+        // Return a 404 page by default
         http_response_code(404);
+        echo "<h3>Page not found - 404</h3>";
         break;
 }

@@ -28,11 +28,14 @@ class SiteController
         if($brief->getID() != null)
         {
             $status = ($brief->unsubscribe($brief->getID())) ? $brief->getEmail() . " is uitgeschreven" : "mislukt om " . $brief->getEmail() . 'uit te schrijven.';
+            include ROOT . DS . 'application' . DS . 'views' . DS . 'essentials' . DS . 'head.php';
             include ROOT . DS . 'application' . DS . 'views' . DS . 'uitschrijven' . DS . 'content.php';
+            include ROOT . DS . 'application' . DS . 'views' . DS . 'essentials' . DS . 'footer.php';
         }
         else
         {
             http_response_code(404);
+            echo "<h3>Page not found - 404</h3>";
         }
     }
 
@@ -52,6 +55,8 @@ class SiteController
             $status = "U bent al geabonneerd op de nieuwsbrief";
         }
 
+        include ROOT . DS . 'application' . DS . 'views' . DS . 'essentials' . DS . 'head.php';
         include ROOT . DS . 'application' . DS . 'views' . DS . 'inschrijven' . DS . 'content.php';
+        include ROOT . DS . 'application' . DS . 'views' . DS . 'essentials' . DS . 'footer.php';
     }
 }
